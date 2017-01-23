@@ -9,14 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.even.androidlabs.R;
 import com.even.androidlabs.recyclerview.snaphelper.TestSnapHelperActivity;
+import com.even.androidlabs.rxjava.RxBus;
 import com.even.androidlabs.test.interfaces.OnItemClickListener;
 import com.even.androidlabs.test.model.ModelType;
 import com.even.androidlabs.test.model.TestModel;
+import io.reactivex.functions.Consumer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,12 @@ public class TestActivity extends AppCompatActivity {
 
         initTestModelList();
         initRecyclerView();
+
+        RxBus.register("testRxBus", new Consumer<Object>() {
+            @Override public void accept(Object object) throws Exception {
+                Toast.makeText(TestActivity.this, object.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initTestModelList() {

@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.even.androidlabs.R;
+import com.even.androidlabs.rxjava.RxBus;
 import com.even.androidlabs.test.model.ModelType;
 import com.even.androidlabs.test.model.TestModel;
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class TestSnapHelperActivity extends AppCompatActivity {
 
         initTestModelList();
         initRecyclerView();
+
+        RxBus.publish("publish by TestSnapHelperActivity");
     }
 
     private void initTestModelList() {
